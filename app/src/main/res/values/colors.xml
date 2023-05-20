@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lightGrey">#F2F2F2F2</color>
     <color name="cornflowerBlue">#6495ED</color>
+    <color name="darkGrey">#262627</color>
 </resources>
