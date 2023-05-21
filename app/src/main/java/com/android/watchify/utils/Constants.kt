@@ -7,5 +7,6 @@ class Constants {
         public const val MAIN_DELAY: Long = 5000
         public const val SEARCH_DELAY: Long = 500
         public const val DEFAULT_LINK: String = "https://google.com"
+        public const val ARTICLE_KEY: String = "article"
     }
 }

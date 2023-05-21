@@ -20,12 +20,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
-    class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view){
+class FavouritesAdapter : RecyclerView.Adapter<FavouritesAdapter.FavouritesViewHolder>() {
+    class FavouritesViewHolder(view: View) : RecyclerView.ViewHolder(view){
         private val image = view.findViewById<ImageView>(R.id.articleImage)
         private val date = view.findViewById<TextView>(R.id.articleDate)
         private val title = view.findViewById<TextView>(R.id.articleTitle)
-        private val favouriteBtn = view.findViewById<ImageView>(R.id.articleLike)
+        private val removeFavouriteBtn = view.findViewById<ImageView>(R.id.favouriteArticleRemove)
 
         fun bind(article: Article) {
             Glide.with(itemView).load(article.urlToImage).into(image)
@@ -35,12 +35,12 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         }
 
         fun setOnLikeListener(listener: OnClickListener){
-            favouriteBtn.setOnClickListener(listener)
+            removeFavouriteBtn.setOnClickListener(listener)
         }
     }
 
     private lateinit var onItemClickListener: (Article) -> Unit
-    private lateinit var onLikeClickListener: (Article) -> Unit
+    private lateinit var onFavouriteRemoveClickListener: (Article) -> Unit
 
     private val callback = object : DiffUtil.ItemCallback<Article>(){
         override fun areContentsTheSame(oldItem: Article, newItem: Article) = oldItem == newItem
@@ -49,9 +49,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     val differ: AsyncListDiffer<Article> = AsyncListDiffer(this, callback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false)
-        return NewsViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouritesViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_favourite, parent, false)
+        return FavouritesViewHolder(view)
     }
 
     override fun getItemCount() = differ.currentList.size
@@ -61,10 +61,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     }
 
     fun setOnLikeListener(listener: (Article) -> Unit){
-        onLikeClickListener = listener
+        onFavouriteRemoveClickListener = listener
     }
 
-    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavouritesViewHolder, position: Int) {
         val article = differ.currentList[position]
         holder.bind(article)
 
@@ -73,7 +73,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         }
 
         holder.setOnLikeListener {
-            onLikeClickListener(article)
+            onFavouriteRemoveClickListener(article)
         }
     }
 }

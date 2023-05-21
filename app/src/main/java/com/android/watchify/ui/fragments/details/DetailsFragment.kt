@@ -10,16 +10,20 @@ import android.view.ViewGroup
 import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.android.watchify.R
 import com.android.watchify.databinding.FragmentDetailsBinding
 import com.android.watchify.utils.Constants
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private val bundleArgs: DetailsFragmentArgs by navArgs()
+    private val viewModel by viewModels<DetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +64,23 @@ class DetailsFragment : Fragment() {
                 Toast.makeText(
                     context,
                     "The device doesn`t have any instruments to visit this link!",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+        binding.favouriteButton.setOnClickListener {
+            try {
+                viewModel.saveArticle(articleArg)
+                Toast.makeText(
+                    context,
+                    "Article has been added to favourites",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            } catch (e: Exception){
+                Toast.makeText(
+                    context,
+                    "Article cannot be added into favourites",
                     Toast.LENGTH_SHORT)
                     .show()
             }

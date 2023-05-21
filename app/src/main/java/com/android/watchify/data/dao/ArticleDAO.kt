@@ -1,15 +1,13 @@
 package com.android.watchify.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.android.watchify.models.Article
 
+@Dao
 interface ArticleDAO {
     @Query("SELECT * FROM articles")
-    suspend fun getAll(): LiveData<List<Article>>
+    suspend fun getAll(): List<Article>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(article: Article)

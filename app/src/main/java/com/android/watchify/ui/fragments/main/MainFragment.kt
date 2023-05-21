@@ -6,22 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.watchify.R
+import com.android.watchify.data.repos.NewsRepository
 import com.android.watchify.databinding.FragmentMainBinding
 import com.android.watchify.ui.adapters.NewsAdapter
+import com.android.watchify.utils.Constants
 import com.android.watchify.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
-    companion object {
-        private const val ARTICLE: String = "article"
-    }
-
     private val viewModel by viewModels<MainViewModel>()
 
     private lateinit var binding: FragmentMainBinding
@@ -41,8 +44,25 @@ class MainFragment : Fragment() {
         binding.newsList.layoutManager = LinearLayoutManager(activity)
 
         adapter.setOnItemClickListener {
-            val bundle = bundleOf(ARTICLE to it)
+            val bundle = bundleOf(Constants.ARTICLE_KEY to it)
             view.findNavController().navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
+        }
+
+        adapter.setOnLikeListener {
+            try {
+                viewModel.saveArticle(it)
+                Toast.makeText(
+                    context,
+                    "Article has been added to favourites",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            } catch (e: Exception){
+                Toast.makeText(
+                    context,
+                    "Article cannot be added into favourites",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
 
         viewModel.news.observe(viewLifecycleOwner) {

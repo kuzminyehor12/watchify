@@ -7,13 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.watchify.R
 import com.android.watchify.databinding.FragmentSearchBinding
 import com.android.watchify.ui.activities.MainActivity
 import com.android.watchify.ui.adapters.NewsAdapter
+import com.android.watchify.ui.fragments.main.MainFragment
 import com.android.watchify.ui.fragments.main.MainViewModel
 import com.android.watchify.utils.Constants
 import com.android.watchify.utils.Resource
@@ -43,6 +47,28 @@ class SearchFragment : Fragment() {
         adapter = NewsAdapter()
         binding.searchList.adapter = adapter
         binding.searchList.layoutManager = LinearLayoutManager(activity)
+
+        adapter.setOnItemClickListener {
+            val bundle = bundleOf(Constants.ARTICLE_KEY to it)
+            view.findNavController().navigate(R.id.action_searchFragment_to_detailsFragment, bundle)
+        }
+
+        adapter.setOnLikeListener {
+            try {
+                viewModel.saveArticle(it)
+                Toast.makeText(
+                    context,
+                    "Article has been added to favourites",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            } catch (e: Exception){
+                Toast.makeText(
+                    context,
+                    "Article cannot be added into favourites",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
 
         binding.searchText.addTextChangedListener { text: Editable? ->
             MainScope().launch {

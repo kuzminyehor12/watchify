@@ -7,4 +7,6 @@
     <string name="search">Search</string>
     <string name="description">Description</string>
     <string name="visit_site">Visit site</string>
+    <string name="favourites">Favourites</string>
+    <string name="news">News</string>
 </resources>
