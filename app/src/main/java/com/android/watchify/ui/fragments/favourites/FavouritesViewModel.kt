@@ -23,10 +23,13 @@ class FavouritesViewModel @Inject constructor(private val newsRepository: NewsRe
 
     private fun getFavourites() = viewModelScope.launch(Dispatchers.IO) {
         val favouritesList = newsRepository.getFavourites()
-        favourites.postValue(favouritesList)
+        withContext(Dispatchers.Main){
+            favourites.value = favouritesList
+        }
     }
 
     fun removeArticle(article: Article) = viewModelScope.launch(Dispatchers.IO) {
         newsRepository.removeFromFavourites(article)
+        getFavourites()
     }
 }

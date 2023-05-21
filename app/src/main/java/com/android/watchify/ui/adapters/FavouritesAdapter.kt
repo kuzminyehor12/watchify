@@ -22,9 +22,9 @@ import javax.inject.Inject
 
 class FavouritesAdapter : RecyclerView.Adapter<FavouritesAdapter.FavouritesViewHolder>() {
     class FavouritesViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        private val image = view.findViewById<ImageView>(R.id.articleImage)
-        private val date = view.findViewById<TextView>(R.id.articleDate)
-        private val title = view.findViewById<TextView>(R.id.articleTitle)
+        private val image = view.findViewById<ImageView>(R.id.favouriteArticleImage)
+        private val date = view.findViewById<TextView>(R.id.favouriteArticleDate)
+        private val title = view.findViewById<TextView>(R.id.favouriteArticleTitle)
         private val removeFavouriteBtn = view.findViewById<ImageView>(R.id.favouriteArticleRemove)
 
         fun bind(article: Article) {
