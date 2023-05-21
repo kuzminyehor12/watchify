@@ -22,7 +22,11 @@
         android:id="@+id/detailsFragment"
         android:name="com.android.watchify.ui.fragments.details.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="article"
+            app:argType="com.android.watchify.models.Article" />
+    </fragment>
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="com.android.watchify.ui.fragments.favourites.FavouritesFragment"
