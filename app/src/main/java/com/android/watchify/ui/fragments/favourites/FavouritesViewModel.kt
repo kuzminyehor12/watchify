@@ -7,6 +7,7 @@ import com.android.watchify.data.repos.NewsRepository
 import com.android.watchify.models.Article
 import com.android.watchify.models.NewsResponse
 import com.android.watchify.utils.Resource
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,9 +23,11 @@ class FavouritesViewModel @Inject constructor(private val newsRepository: NewsRe
     }
 
     private fun getFavourites() = viewModelScope.launch(Dispatchers.IO) {
-        val favouritesList = newsRepository.getFavourites()
-        withContext(Dispatchers.Main){
-            favourites.value = favouritesList
+        FirebaseAuth.getInstance().currentUser?.let {
+            val favouritesList =  newsRepository.getFavourites(it.uid)
+            withContext(Dispatchers.Main){
+                favourites.value = favouritesList
+            }
         }
     }
 

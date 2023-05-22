@@ -15,6 +15,7 @@ import com.android.watchify.data.repos.NewsRepository
 import com.android.watchify.databinding.ItemArticleBinding
 import com.android.watchify.models.Article
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -65,15 +66,19 @@ class FavouritesAdapter : RecyclerView.Adapter<FavouritesAdapter.FavouritesViewH
     }
 
     override fun onBindViewHolder(holder: FavouritesViewHolder, position: Int) {
-        val article = differ.currentList[position]
-        holder.bind(article)
+        FirebaseAuth.getInstance().currentUser?.let {
+            val article = differ.currentList[position]
+            article.uid = it.uid
 
-        holder.itemView.setOnClickListener {
-            onItemClickListener(article)
-        }
+            holder.bind(article)
 
-        holder.setOnLikeListener {
-            onFavouriteRemoveClickListener(article)
+            holder.itemView.setOnClickListener {
+                onItemClickListener(article)
+            }
+
+            holder.setOnLikeListener {
+                onFavouriteRemoveClickListener(article)
+            }
         }
     }
 }

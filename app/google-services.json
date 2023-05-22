@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "952637819952",
+    "project_id": "watchify-2d049",
+    "storage_bucket": "watchify-2d049.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952637819952:android:71d13a7c2c7039f71671f5",
+        "android_client_info": {
+          "package_name": "com.android.watchify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952637819952-20hubpfjrqbkv3qa2fpo3d6leoqh3d48.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.watchify",
+            "certificate_hash": "a724c9230a90cf64cd61763ff846d52bd27a3c10"
+          }
+        },
+        {
+          "client_id": "952637819952-c4l8ttpb9ssac4j0qdi7rqigmqjl0bih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJP_vCe3wuhLLZnTNTTNDjutM2-Bl3MyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952637819952-c4l8ttpb9ssac4j0qdi7rqigmqjl0bih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
