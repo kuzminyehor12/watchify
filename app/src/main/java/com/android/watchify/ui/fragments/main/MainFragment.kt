@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -17,6 +18,7 @@ import com.android.watchify.databinding.FragmentMainBinding
 import com.android.watchify.ui.adapters.NewsAdapter
 import com.android.watchify.utils.Constants
 import com.android.watchify.utils.Resource
+import com.firebase.ui.auth.AuthUI
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +44,7 @@ class MainFragment : Fragment() {
         adapter = NewsAdapter()
         binding.newsList.adapter = adapter
         binding.newsList.layoutManager = LinearLayoutManager(activity)
+        // AuthUI.getInstance().signOut(requireContext())
 
         adapter.setOnItemClickListener {
             val bundle = bundleOf(Constants.ARTICLE_KEY to it)
