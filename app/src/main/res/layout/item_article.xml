@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginVertical="12dp"
+    android:layout_marginHorizontal="16dp">
+
+    <ImageView
+        android:id="@+id/articleImage"
+        android:layout_width="88dp"
+        android:layout_height="84dp"
+        android:background="@drawable/bg_image_10"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_default_news_pic" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/articleInfo"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/articleImage"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/articleDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/darkGrey"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/articleTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontWeight="700"
+            android:maxLines="3"
+            android:text=""
+            android:textColor="@color/darkGrey"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ImageView
+        android:id="@+id/articleLike"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_like"
+        app:layout_constraintStart_toEndOf="@+id/articleInfo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/articleShare"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintStart_toEndOf="@+id/articleLike"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

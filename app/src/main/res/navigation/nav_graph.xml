@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.android.watchify.ui.fragments.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.android.watchify.ui.fragments.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="article"
+            app:argType="com.android.watchify.models.Article" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.android.watchify.ui.fragments.favourites.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" >
+        <action
+            android:id="@+id/action_favouritesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.android.watchify.ui.fragments.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.android.watchify.ui.fragments.auth.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" />
+</navigation>
