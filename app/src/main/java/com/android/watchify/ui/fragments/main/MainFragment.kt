@@ -44,7 +44,6 @@ class MainFragment : Fragment() {
         adapter = NewsAdapter()
         binding.newsList.adapter = adapter
         binding.newsList.layoutManager = LinearLayoutManager(activity)
-        // AuthUI.getInstance().signOut(requireContext())
 
         adapter.setOnItemClickListener {
             val bundle = bundleOf(Constants.ARTICLE_KEY to it)
