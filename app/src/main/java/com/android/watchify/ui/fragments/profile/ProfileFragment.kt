@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.android.watchify.R
 import com.android.watchify.databinding.FragmentProfileBinding
+import com.android.watchify.utils.relaunch
 import com.bumptech.glide.Glide
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -45,17 +46,5 @@ class ProfileFragment : Fragment() {
         }
 
         binding.profileProgressBar.isVisible = false
-    }
-
-    private fun relaunch(){
-        val packageName = requireContext().packageName
-        val launchIntent = requireContext().packageManager.getLaunchIntentForPackage(packageName)
-
-        if (launchIntent != null) {
-            launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(launchIntent)
-        }
-
-        requireActivity().finish()
     }
 }

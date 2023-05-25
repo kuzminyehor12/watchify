@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
         signInLauncher.launch(signInIntent)
     }
 
-    private fun setupViewPager(){
+    /*private fun setupViewPager(){
         FirebaseAuth.getInstance().currentUser?.let {
             val adapter = WatchifyViewPagerAdapter(this)
             binding.viewPager.adapter = adapter
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
                 true
             }
         }
-    }
+    }*/
 
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()

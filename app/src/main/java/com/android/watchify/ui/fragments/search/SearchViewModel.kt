@@ -7,6 +7,7 @@ import com.android.watchify.data.repos.NewsRepository
 import com.android.watchify.models.Article
 import com.android.watchify.models.NewsResponse
 import com.android.watchify.utils.Resource
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,6 +35,9 @@ class SearchViewModel @Inject constructor(private val newsRepository: NewsReposi
     }
 
     fun saveArticle(article: Article) = viewModelScope.launch(Dispatchers.IO) {
-        newsRepository.addToFavourites(article)
+        FirebaseAuth.getInstance().currentUser?.let {
+            article.uid = it.uid
+            newsRepository.addToFavourites(article, it.uid)
+        }
     }
 }

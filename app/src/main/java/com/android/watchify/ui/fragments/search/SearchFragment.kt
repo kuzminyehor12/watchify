@@ -21,6 +21,7 @@ import com.android.watchify.ui.fragments.main.MainFragment
 import com.android.watchify.ui.fragments.main.MainViewModel
 import com.android.watchify.utils.Constants
 import com.android.watchify.utils.Resource
+import com.android.watchify.utils.relaunch
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -61,6 +62,7 @@ class SearchFragment : Fragment() {
                     "Article has been added to favourites",
                     Toast.LENGTH_SHORT)
                     .show()
+                relaunch()
             } catch (e: Exception){
                 Toast.makeText(
                     context,

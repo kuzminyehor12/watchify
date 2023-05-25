@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavouritesViewModel @Inject constructor(private val newsRepository: NewsRepository): ViewModel() {
-    val favourites: MutableLiveData<List<Article>> = MutableLiveData()
+    val favourites: MutableLiveData<List<Article>> = newsRepository.favourites
 
     init {
         getFavourites()
@@ -24,15 +24,16 @@ class FavouritesViewModel @Inject constructor(private val newsRepository: NewsRe
 
     private fun getFavourites() = viewModelScope.launch(Dispatchers.IO) {
         FirebaseAuth.getInstance().currentUser?.let {
-            val favouritesList =  newsRepository.getFavourites(it.uid)
+            val favouritesList = newsRepository.getFavourites(it.uid)
             withContext(Dispatchers.Main){
-                favourites.value = favouritesList
+                favourites.postValue(favouritesList)
             }
         }
     }
 
     fun removeArticle(article: Article) = viewModelScope.launch(Dispatchers.IO) {
-        newsRepository.removeFromFavourites(article)
-        getFavourites()
+        FirebaseAuth.getInstance().currentUser?.let {
+            newsRepository.removeFromFavourites(article, it.uid)
+        }
     }
 }
