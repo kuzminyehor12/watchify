@@ -4,4 +4,4 @@ Watchify is a Android App related to different News Portals with using of Retrof
 Prerequisites:
 * Register in https://newsapi.org/ and copy your API Key
 * Go to Constants.kt file
-* Put your api key instead of mine
+* Put your api key instead into API_KET property
