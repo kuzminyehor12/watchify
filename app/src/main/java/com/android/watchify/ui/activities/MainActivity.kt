@@ -1,12 +1,18 @@
 package com.android.watchify.ui.activities
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.android.watchify.R
 import com.android.watchify.databinding.ActivityMainBinding
+import com.android.watchify.ui.fragments.main.MainFragment
 import com.android.watchify.utils.Constants
 import com.android.watchify.utils.OnAuthStateChange
 import com.firebase.ui.auth.AuthUI
@@ -28,6 +34,11 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        //setupViewPager()
+        authStateListener = this
+
         setContentView(R.layout.fragment_splash)
         showFragmentFromAuthResult()
     }
@@ -42,6 +53,24 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
         signInLauncher.launch(signInIntent)
     }
 
+    private fun setupViewPager(){
+        FirebaseAuth.getInstance().currentUser?.let {
+            val adapter = WatchifyViewPagerAdapter(this)
+            binding.viewPager.adapter = adapter
+
+            binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    binding.bottomNavigation.menu.getItem(position).isChecked = true
+                }
+            })
+
+            binding.bottomNavigation.setOnItemSelectedListener {
+                binding.navigationFragment.findNavController().navigate(it.itemId)
+                true
+            }
+        }
+    }
+
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
     ) {
@@ -50,7 +79,7 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
 
     private var authStateListener: OnAuthStateChange? = null
     private fun onAuthResult(res: FirebaseAuthUIAuthenticationResult) {
-        if (res.resultCode == AppCompatActivity.RESULT_OK) {
+        if (res.resultCode == RESULT_OK) {
             FirebaseAuth.getInstance().currentUser?.also {
                 authStateListener?.onAuthStateChanged()
             } ?: Toast
@@ -66,7 +95,7 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
                 Toast
                     .makeText(
                         this,
-                        "Auth error",
+                        "Network error",
                         Toast.LENGTH_SHORT)
                     .show()
             }
@@ -83,7 +112,6 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
     private fun showFragmentFromAuthResult(){
         CoroutineScope(Dispatchers.Main).launch {
             delay(Constants.MAIN_DELAY)
-            binding = ActivityMainBinding.inflate(layoutInflater)
             if (FirebaseAuth.getInstance().currentUser == null){
                 authorize()
             } else {
@@ -94,6 +122,7 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
     }
 
     override fun onAuthStateChanged() {
+        //setupViewPager()
         showFragmentFromAuthResult()
     }
 }

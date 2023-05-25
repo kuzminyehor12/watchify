@@ -9,4 +9,8 @@
     <string name="visit_site">Visit site</string>
     <string name="favourites">Favourites</string>
     <string name="news">News</string>
+    <string name="logout">Logout</string>
+    <string name="display_name">Display Name</string>
+    <string name="email">Email</string>
+    <string name="profile">Profile</string>
 </resources>

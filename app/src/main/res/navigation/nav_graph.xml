@@ -54,8 +54,8 @@
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/authFragment"
-        android:name="com.android.watchify.ui.fragments.auth.AuthFragment"
-        android:label="fragment_auth"
-        tools:layout="@layout/fragment_auth" />
+        android:id="@+id/profile_fragment"
+        android:name="com.android.watchify.ui.fragments.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
