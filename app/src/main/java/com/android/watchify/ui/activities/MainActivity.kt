@@ -35,8 +35,6 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        //setupViewPager()
         authStateListener = this
 
         setContentView(R.layout.fragment_splash)
@@ -51,24 +49,6 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
             .build()
 
         signInLauncher.launch(signInIntent)
-    }
-
-    private fun setupViewPager(){
-        FirebaseAuth.getInstance().currentUser?.let {
-            val adapter = WatchifyViewPagerAdapter(this)
-            binding.viewPager.adapter = adapter
-
-            binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    binding.bottomNavigation.menu.getItem(position).isChecked = true
-                }
-            })
-
-            binding.bottomNavigation.setOnItemSelectedListener {
-                binding.navigationFragment.findNavController().navigate(it.itemId)
-                true
-            }
-        }
     }
 
     private val signInLauncher = registerForActivityResult(
@@ -122,7 +102,6 @@ class MainActivity : AppCompatActivity(), OnAuthStateChange {
     }
 
     override fun onAuthStateChanged() {
-        //setupViewPager()
         showFragmentFromAuthResult()
     }
 }

@@ -18,6 +18,7 @@ import com.android.watchify.databinding.FragmentMainBinding
 import com.android.watchify.ui.adapters.NewsAdapter
 import com.android.watchify.utils.Constants
 import com.android.watchify.utils.Resource
+import com.android.watchify.utils.relaunch
 import com.firebase.ui.auth.AuthUI
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -58,6 +59,7 @@ class MainFragment : Fragment() {
                     "Article has been added to favourites",
                     Toast.LENGTH_SHORT)
                     .show()
+                relaunch()
             } catch (e: Exception){
                 Toast.makeText(
                     context,

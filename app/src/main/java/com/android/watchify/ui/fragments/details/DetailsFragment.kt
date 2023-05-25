@@ -16,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.android.watchify.R
 import com.android.watchify.databinding.FragmentDetailsBinding
 import com.android.watchify.utils.Constants
+import com.android.watchify.utils.relaunch
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -77,6 +78,7 @@ class DetailsFragment : Fragment() {
                     "Article has been added to favourites",
                     Toast.LENGTH_SHORT)
                     .show()
+                relaunch()
             } catch (e: Exception){
                 Toast.makeText(
                     context,
